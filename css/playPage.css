@@ -1,0 +1,28 @@
+body
+{
+    background-color: rgb(43, 25, 54);
+}
+
+#worldGrid {
+    display:grid;
+    grid-template-columns: repeat(5, 60px);
+    gap: 5px;
+    margin-top: 20px;
+}
+
+.tile {
+    width: 60px;
+    height: 60px;
+    background-color: lightgray;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+.active {
+    background-color: orange !important;
+    border: 2px solid black;
+}
+
