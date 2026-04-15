@@ -1,6 +1,6 @@
 const worldSize = 5 // behöver ändra nummret i playPage.css också, om man ska ändra
 let world = [];
-let player = { x: 0, y: 0 };
+let player = { x: 2, y: 2 };
 let catsLeft = 3;
 
 for (let x = 0; x < worldSize; x++) {
@@ -40,6 +40,7 @@ window.onload = function () {
 
 function drawWorld() {
     const grid = document.getElementById("worldGrid");
+    grid.innerHTML = "" // tömma grid
 
     for (let x = 0; x < worldSize; x++) {
         for (let y = 0; y < worldSize; y++) {
@@ -62,7 +63,7 @@ function drawWorld() {
 }
 window.onload = function () {
     placeCat(3);
-    placeZombi(2);
+    placeZombi(1);
     drawWorld();
     updateView();
 };
@@ -104,60 +105,107 @@ function placeZombi(amount) {
 
 function meeting() {
     const meetingText = document.getElementById("Meet");
-    if (world[player.x][player.y].hasCat) {
+    if (world[player.x][player.y].hasZombie) {
+        meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
+        gameOver();
+    }
+    else if (world[player.x][player.y].hasCat) {
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
         catsLeft --;
     }
-    else if (world[player.x][player.y].hasZombie) {
-        meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
-        gameOver();
-    }
     else{
         meetingText.innerText = "Här finns inget speciellt.";
     }
+
+    if(catsLeft == 0){
+        meetingText.innerText = "du vann!!!!";
+    }
 }
 
+
+function zombieMoves()
+{
+    let newPositions = [];
+    for(let x = 0; x < worldSize; x++){
+        for (let y = 0; y < worldSize; y++){
+            if (world[x][y].hasZombie){
+                let newX = x;
+                let newY = y;
+
+                if (x < player.x) {
+                    newX++;
+                }
+                else if (x > player.x) {
+                    newX--;
+                }
+                else {
+                    if (y < player.y){ 
+                        newY++;
+                    }
+                    else if (y > player.y){
+                         newY--;
+                    }
+                }
+                newPositions.push({x: newX, y: newY});
+            }
+        }
+    }
+    // 2. Rensa alla zombies
+    for (let x = 0; x < worldSize; x++) {
+        for (let y = 0; y < worldSize; y++) {
+            world[x][y].hasZombie = false;
+        }
+    }
+
+    // 3. Placera zombies på nya positioner
+    newPositions.forEach(pos => {
+        world[pos.x][pos.y].hasZombie = true;
+    });
+}
 function gameOver()
 {
     document.getElementById("east").disabled = true;
     document.getElementById("west").disabled = true;
     document.getElementById("north").disabled = true;
     document.getElementById("south").disabled = true;
-
 }
-
 
 //---------------------------------- moving
 document.getElementById("east").addEventListener("click", function () {
     if (player.y < worldSize - 1) {
         player.y++;
-
     }
+    zombieMoves();
+    drawWorld();
     updateView();
     meeting();
+    
 })
-
 document.getElementById("west").addEventListener("click", function () {
     if (player.y > 0) {
         player.y--
     }
+    zombieMoves();
+    drawWorld();
     updateView();
     meeting();
 })
-
 document.getElementById("north").addEventListener("click", function () {
     if (player.x > 0) {
         player.x--
     }
+    zombieMoves();
+    drawWorld();
     updateView();
     meeting();
 })
-
 document.getElementById("south").addEventListener("click", function () {
     if (player.x < worldSize - 1) {
         player.x++
     }
+    zombieMoves();
+    drawWorld();
     updateView();
     meeting();
 })
