@@ -120,6 +120,7 @@ function meeting() {
 
     if(catsLeft == 0){
         meetingText.innerText = "du vann!!!!";
+        gameOver();
     }
 }
 
