@@ -1,5 +1,7 @@
 const worldSize = 5 // behöver ändra nummret i playPage.css också, om man ska ändra
 let world = [];
+let player = { x: 0, y: 0 };
+let catsLeft = 3;
 
 for (let x = 0; x < worldSize; x++) {
     world[x] = [];
@@ -11,7 +13,7 @@ for (let x = 0; x < worldSize; x++) {
         };
     }
 }
-let player = { x: 0, y: 0 };
+
 
 function updateView() {
     const placeImg = document.getElementById("place");
@@ -60,7 +62,7 @@ function drawWorld() {
 }
 window.onload = function () {
     placeCat(3);
-    placeZombi(4);
+    placeZombi(2);
     drawWorld();
     updateView();
 };
@@ -100,10 +102,29 @@ function placeZombi(amount) {
 
 //---------------------------------- meeting cat and zombie
 
-function meetingCat() {
+function meeting() {
+    const meetingText = document.getElementById("Meet");
     if (world[player.x][player.y].hasCat) {
-        document.getElementById("SavingCat").innerText = "Du hittade katten!";
+        meetingText.innerText = "🐱 Du hittade en katt!";
+        world[player.x][player.y].hasCat = false;
+        catsLeft --;
     }
+    else if (world[player.x][player.y].hasZombie) {
+        meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
+        gameOver();
+    }
+    else{
+        meetingText.innerText = "Här finns inget speciellt.";
+    }
+}
+
+function gameOver()
+{
+    document.getElementById("east").disabled = true;
+    document.getElementById("west").disabled = true;
+    document.getElementById("north").disabled = true;
+    document.getElementById("south").disabled = true;
+
 }
 
 
@@ -114,7 +135,7 @@ document.getElementById("east").addEventListener("click", function () {
 
     }
     updateView();
-    meetingCat();
+    meeting();
 })
 
 document.getElementById("west").addEventListener("click", function () {
@@ -122,7 +143,7 @@ document.getElementById("west").addEventListener("click", function () {
         player.y--
     }
     updateView();
-    meetingCat();
+    meeting();
 })
 
 document.getElementById("north").addEventListener("click", function () {
@@ -130,7 +151,7 @@ document.getElementById("north").addEventListener("click", function () {
         player.x--
     }
     updateView();
-    meetingCat();
+    meeting();
 })
 
 document.getElementById("south").addEventListener("click", function () {
@@ -138,5 +159,5 @@ document.getElementById("south").addEventListener("click", function () {
         player.x++
     }
     updateView();
-    meetingCat();
+    meeting();
 })
