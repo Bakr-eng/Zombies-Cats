@@ -65,7 +65,7 @@ window.onload = function () {
     updateView();
 };
 
-//-------------------------------------cats & zombies
+//-------------------------------------add cats & zombies
 
 function placeCat(amount) {
     let placed = 0;
@@ -98,14 +98,23 @@ function placeZombi(amount) {
     }
 }
 
+//---------------------------------- meeting cat and zombie
 
-//--------------------------------- moving
+function meetingCat() {
+    if (world[player.x][player.y].hasCat) {
+        document.getElementById("SavingCat").innerText = "Du hittade katten!";
+    }
+}
+
+
+//---------------------------------- moving
 document.getElementById("east").addEventListener("click", function () {
     if (player.y < worldSize - 1) {
         player.y++;
 
     }
     updateView();
+    meetingCat();
 })
 
 document.getElementById("west").addEventListener("click", function () {
@@ -113,6 +122,7 @@ document.getElementById("west").addEventListener("click", function () {
         player.y--
     }
     updateView();
+    meetingCat();
 })
 
 document.getElementById("north").addEventListener("click", function () {
@@ -120,6 +130,7 @@ document.getElementById("north").addEventListener("click", function () {
         player.x--
     }
     updateView();
+    meetingCat();
 })
 
 document.getElementById("south").addEventListener("click", function () {
@@ -127,4 +138,5 @@ document.getElementById("south").addEventListener("click", function () {
         player.x++
     }
     updateView();
+    meetingCat();
 })
