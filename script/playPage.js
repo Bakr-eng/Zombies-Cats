@@ -4,13 +4,32 @@ let world = [];
 let player = { x: 2, y: 2 };
 let catsLeft = 3;
 
+
+const placeImages = [
+    "images/place1.jpg",
+    "images/place2.jpg",
+    "images/place3.jpg",
+    "images/place4.jpg",
+    "images/place5.jpg",
+    "images/place6.jpg",
+    "images/place7.jpg",
+    "images/place8.jpg",
+    "images/place9.jpg",
+    "images/place10.jpg",
+    "images/place11.jpg"
+];
+
+
 for (let x = 0; x < worldSize; x++) {
     world[x] = [];
     for (let y = 0; y < worldSize; y++) {
+
+        const randomIndex = Math.floor(Math.random() * placeImages.length); //slumpa bild
+
         world[x][y] = {
             hasCat: false,
             hasZombie: false,
-            image: "images/place1.jpg"
+            image: placeImages[randomIndex]
         };
     }
 }
@@ -135,7 +154,10 @@ function meeting() {
     else if (world[player.x][player.y].hasCat) {
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
-        world[player.x][player.y].image = "images/place1.jpg";
+
+        const randomIndex = Math.floor(Math.random() * placeImages.length); //random bild efter att hitade katten
+        world[player.x][player.y].image = placeImages[randomIndex];
+
         catsLeft--;
     }
     else {
