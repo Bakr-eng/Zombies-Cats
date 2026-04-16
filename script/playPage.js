@@ -90,7 +90,7 @@ function placeZombi(amount) {
         if (x === player.x && y === player.y) {
             continue;
         }
-        if (world[x][y].hasZombie === false) {
+        if (!world[x][y].hasZombie) {
             world[x][y].hasZombie = true;
             placed++;
         }
