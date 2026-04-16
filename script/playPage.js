@@ -1,4 +1,5 @@
 const worldSize = 5 // behöver ändra nummret i playPage.css också, om man ska ändra
+let catImage = []
 let world = [];
 let player = { x: 2, y: 2 };
 let catsLeft = 3;
@@ -14,6 +15,69 @@ for (let x = 0; x < worldSize; x++) {
     }
 }
 
+async function initGame() {
+    const url = "https://api.pexels.com/v1/search?query=cat+outside&per_page=10";
+    const apiKey = "CjpiMDz8dzJ3LhrdACOHD1Nm1FSRxkdjGrF03KWWsbW5w2E3JhZdgPIJ";
+
+    try {
+        const response = await fetch(url, {
+            headers: { Authorization: apiKey }
+        });
+
+        const data = await response.json();
+        catImage = data.photos.map(p => p.src.medium);
+
+    } catch (error) {
+        console.error("error: ", error)
+    }
+    placeCat(3);
+    placeZombi(1);
+    drawWorld();
+    updateView();
+}
+window.onload = initGame;
+
+
+//-------------------------------------add cats & zombies
+
+function placeCat(amount) {
+    let placed = 0;
+
+    while (placed < amount) {
+        let x = Math.floor(Math.random() * worldSize);
+        let y = Math.floor(Math.random() * worldSize);
+
+        if (x === player.x && y === player.y) continue;
+
+        if (!world[x][y].hasCat) {
+            world[x][y].hasCat = true;
+
+            if (catImage.length > 0) {
+                const randomIndex = Math.floor(Math.random() * catImage.length);
+                world[x][y].image = catImage[randomIndex];
+            }
+
+            placed++;
+        }
+
+    }
+}
+
+function placeZombi(amount) {
+    let placed = 0;
+    while (placed < amount) {
+        let x = Math.floor(Math.random() * worldSize);
+        let y = Math.floor(Math.random() * worldSize);
+        if (x === player.x && y === player.y) {
+            continue;
+        }
+        if (world[x][y].hasZombie === false) {
+            world[x][y].hasZombie = true;
+            placed++;
+        }
+    }
+}
+
 
 function updateView() {
     const placeImg = document.getElementById("place");
@@ -21,7 +85,7 @@ function updateView() {
 
     // Ta bort aktiv markering från alla rutor
     document.querySelectorAll(".tile").forEach(t => t.classList.remove("active"));
-    
+
     const activeTile = document.getElementById(`tile-${player.x}-${player.y}`);
     if (activeTile) {
         activeTile.classList.add("active")
@@ -33,10 +97,6 @@ function updateView() {
     document.getElementById("south").disabled = (player.x >= worldSize - 1);
 
 }
-
-window.onload = function () {
-    updateView();
-};
 
 function drawWorld() {
     const grid = document.getElementById("worldGrid");
@@ -61,45 +121,7 @@ function drawWorld() {
         }
     }
 }
-window.onload = function () {
-    placeCat(3);
-    placeZombi(1);
-    drawWorld();
-    updateView();
-};
 
-//-------------------------------------add cats & zombies
-
-function placeCat(amount) {
-    let placed = 0;
-
-    while (placed < amount) {
-        let x = Math.floor(Math.random() * worldSize);
-        let y = Math.floor(Math.random() * worldSize);
-
-        if (x === player.x && y === player.y) {
-            continue;
-        }
-        if (world[x][y].hasCat === false) {
-            world[x][y].hasCat = true;
-            placed++;
-        }
-    }
-}
-function placeZombi(amount) {
-    let placed = 0;
-    while (placed < amount) {
-        let x = Math.floor(Math.random() * worldSize);
-        let y = Math.floor(Math.random() * worldSize);
-        if (x === player.x && y === player.y) {
-            continue;
-        }
-        if (world[x][y].hasZombie === false) {
-            world[x][y].hasZombie = true;
-            placed++;
-        }
-    }
-}
 
 //---------------------------------- meeting cat and zombie
 
@@ -112,25 +134,25 @@ function meeting() {
     else if (world[player.x][player.y].hasCat) {
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
-        catsLeft --;
+        world[player.x][player.y].image = "images/test.jpg";
+        catsLeft--;
     }
-    else{
+    else {
         meetingText.innerText = "Här finns inget speciellt.";
     }
 
-    if(catsLeft == 0){
+    if (catsLeft == 0) {
         meetingText.innerText = "du vann!!!!";
         gameOver();
     }
 }
 
 
-function zombieMoves()
-{
+function zombieMoves() {
     let newPositions = [];
-    for(let x = 0; x < worldSize; x++){
-        for (let y = 0; y < worldSize; y++){
-            if (world[x][y].hasZombie){
+    for (let x = 0; x < worldSize; x++) {
+        for (let y = 0; y < worldSize; y++) {
+            if (world[x][y].hasZombie) {
                 let newX = x;
                 let newY = y;
 
@@ -141,14 +163,14 @@ function zombieMoves()
                     newX--;
                 }
                 else {
-                    if (y < player.y){ 
+                    if (y < player.y) {
                         newY++;
                     }
-                    else if (y > player.y){
-                         newY--;
+                    else if (y > player.y) {
+                        newY--;
                     }
                 }
-                newPositions.push({x: newX, y: newY});
+                newPositions.push({ x: newX, y: newY });
             }
         }
     }
@@ -164,8 +186,7 @@ function zombieMoves()
         world[pos.x][pos.y].hasZombie = true;
     });
 }
-function gameOver()
-{
+function gameOver() {
     document.getElementById("east").disabled = true;
     document.getElementById("west").disabled = true;
     document.getElementById("north").disabled = true;
@@ -181,7 +202,7 @@ document.getElementById("east").addEventListener("click", function () {
     drawWorld();
     updateView();
     meeting();
-    
+
 })
 document.getElementById("west").addEventListener("click", function () {
     if (player.y > 0) {
