@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,14 +8,16 @@
     <link rel="StyleSheet" href="css/playPage.css">
 
 </head>
+
 <body>
     <button type="button" id="logout">tillbaka</button>
 
     <div id="World"></div>
 
-    <img id="place" width="200">
-    
-    <img id="catImage" width="300">
+    <div class="imagPlace">
+        <img id="placeImage" width="200">
+        <img id="catImage" width="300">
+    </div>
 
     <h3 id="Meet">Hitta katten!</h3>
     <div id="worldGrid"></div>
@@ -23,14 +26,15 @@
 
 
     <div id="movingPlace">
-    <button type="button" id="east">east</button>
-    <button type="button" id="west">west</button>
-    <button type="button" id="north">north</button>
-    <button type="button" id="south">south</button>
+        <button type="button" id="east">east</button>
+        <button type="button" id="west">west</button>
+        <button type="button" id="north">north</button>
+        <button type="button" id="south">south</button>
     </div>
 
 
     <script src="script/script.js"></script>
     <script src="script/playPage.js"></script>
 </body>
+
 </html>

@@ -10,7 +10,7 @@ for (let x = 0; x < worldSize; x++) {
         world[x][y] = {
             hasCat: false,
             hasZombie: false,
-            image: "images/test.jpg"
+            image: "images/place1.jpg"
         };
     }
 }
@@ -78,9 +78,10 @@ function placeZombi(amount) {
     }
 }
 
+//-------------------------------
 
 function updateView() {
-    const placeImg = document.getElementById("place");
+    const placeImg = document.getElementById("placeImage");
     placeImg.src = world[player.x][player.y].image; // Byter bild till den bild som finns på spelarens plats
 
     // Ta bort aktiv markering från alla rutor
@@ -134,7 +135,7 @@ function meeting() {
     else if (world[player.x][player.y].hasCat) {
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
-        world[player.x][player.y].image = "images/test.jpg";
+        world[player.x][player.y].image = "images/place1.jpg";
         catsLeft--;
     }
     else {
