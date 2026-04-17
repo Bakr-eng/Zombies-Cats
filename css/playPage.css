@@ -57,7 +57,7 @@ body
 #movingPlace button:disabled {
     background-color: #888;
     opacity: 1.5;
-    cursor: not-allowed;
+    cursor:not-allowed;
     transform:none;
 }
 
@@ -87,4 +87,25 @@ body
     bottom: 50px;
     right: 38%;
     font-size: 20px;
+}
+
+
+.endBackground
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vw;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+}
+
+#endScrean{
+    max-width: 80vw;
+    max-height: 80vw;
+    border-radius: 10px;
 }

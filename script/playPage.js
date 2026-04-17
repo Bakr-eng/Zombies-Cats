@@ -3,20 +3,31 @@ let catImage = []
 let world = [];
 let player = { x: 2, y: 2 };
 let catsLeft = 3;
+let hittadeKatter = 0;
 
 
 const placeImages = [
-    "images/place1.jpg",
-    "images/place2.jpg",
-    "images/place3.jpg",
-    "images/place4.jpg",
-    "images/place5.jpg",
-    "images/place6.jpg",
-    "images/place7.jpg",
-    "images/place8.jpg",
-    "images/place9.jpg",
-    "images/place10.jpg",
-    "images/place11.jpg"
+    "images/img (1).jpg",
+    "images/img (2).jpg",
+    "images/img (3).jpg",
+    "images/img (4).jpg",
+    "images/img (5).jpg",
+    "images/img (6).jpg",
+    "images/img (7).jpg",
+    "images/img (8).jpg",
+    "images/img (9).jpg",
+    "images/img (10).jpg",
+    "images/img (11).jpg",
+    "images/img (12).jpg",
+    "images/img (13).jpg",
+    "images/img (14).jpg",
+    "images/img (15).jpg",
+    "images/img (16).jpg",
+    "images/img (17).jpg",
+    "images/img (18).jpg",
+    "images/img (19).jpg",
+    "images/img (20).jpg",
+    "images/img (21).jpg"
 ];
 
 
@@ -131,7 +142,7 @@ function drawWorld() {
 
             // man kan se var katterna ligger 
             if (world[x][y].hasCat) {
-                tile.style.backgroundColor = "pink"; // eller valfri färg
+                tile.style.backgroundColor = "pink";
             }
             if (world[x][y].hasZombie) {
                 tile.style.backgroundColor = "rgb(0, 78, 4)";
@@ -149,11 +160,20 @@ function meeting() {
     const meetingText = document.getElementById("Meet");
     if (world[player.x][player.y].hasZombie) {
         meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
+
+        const endScrean = document.getElementById("endScrean");
+        endScrean.src = "images/zombie.png";
+        
+         document.querySelector(".endBackground").style.display = "flex";
+
         gameOver();
     }
     else if (world[player.x][player.y].hasCat) {
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
+        hittadeKatter ++;
+        document.getElementById("foundCatNum").innerText = "Hittade katter" + hittadeKatter;
+        
 
         const randomIndex = Math.floor(Math.random() * placeImages.length); //random bild efter att hitade katten
         world[player.x][player.y].image = placeImages[randomIndex];
