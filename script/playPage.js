@@ -154,25 +154,41 @@ function drawWorld() {
 }
 
 
-//---------------------------------- meeting cat and zombie
+//---------------------------------- meeting cat or zombie
+ const restartBtn = document.getElementById("restart");
+ const closeGame = document.getElementById("closeGame");
+
 
 function meeting() {
     const meetingText = document.getElementById("Meet");
+    const restart = document.getElementById("restart");
+    const closeGame = document.getElementById("closeGame");
+
     if (world[player.x][player.y].hasZombie) {
         meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
 
         const endScrean = document.getElementById("endScrean");
         endScrean.src = "images/zombie.png";
-        
-         document.querySelector(".endBackground").style.display = "flex";
+        document.querySelector(".endBackground").style.display = "flex";
 
+        if(restart){
+            restart.addEventListener("click", function() {
+                window.location.href = "playPage.html";
+            });
+        }
+        if(closeGame){
+            closeGame.addEventListener("click", function() {
+                 window.location.href = "index.html";
+            })
+        }
         gameOver();
     }
+
     else if (world[player.x][player.y].hasCat) {
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
         hittadeKatter ++;
-        document.getElementById("foundCatNum").innerText = "Hittade katter" + hittadeKatter;
+        document.getElementById("foundCatNum").innerText = "Hittade katter: " + hittadeKatter;
         
 
         const randomIndex = Math.floor(Math.random() * placeImages.length); //random bild efter att hitade katten
@@ -189,8 +205,6 @@ function meeting() {
         gameOver();
     }
 }
-
-
 function zombieMoves() {
     let newPositions = [];
     for (let x = 0; x < worldSize; x++) {
@@ -217,14 +231,13 @@ function zombieMoves() {
             }
         }
     }
-    // 2. Rensa alla zombies
+    // Rensa alla zombies
     for (let x = 0; x < worldSize; x++) {
         for (let y = 0; y < worldSize; y++) {
             world[x][y].hasZombie = false;
         }
     }
-
-    // 3. Placera zombies på nya positioner
+    // Placera zombies på nya positioner
     newPositions.forEach(pos => {
         world[pos.x][pos.y].hasZombie = true;
     });
