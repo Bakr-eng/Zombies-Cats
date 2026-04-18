@@ -98,8 +98,9 @@ body {
     top: 0;
     left: 0;
     width: 100vw;
-    height: 100vw;
+    height: 80vh;
     display: none;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.7);
@@ -110,4 +111,26 @@ body {
     max-width: 80vw;
     max-height: 80vw;
     border-radius: 10px;
+}
+
+.game-btn {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+.game-btn button {
+    padding: 12px 24px;
+    font-size: 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #ffcc00;
+    color: #000;
+    transition: 0.2s;
+}
+
+.game-btn button:hover{
+    background-color: #ffaa00;
+    transform: scale(1.3);
 }

@@ -157,22 +157,22 @@ function drawWorld() {
 //---------------------------------- meeting cat or zombie
  const restartBtn = document.getElementById("restart");
  const closeGame = document.getElementById("closeGame");
+ const meetingText = document.getElementById("Meet");
 
 
 function meeting() {
-    const meetingText = document.getElementById("Meet");
-    const restart = document.getElementById("restart");
-    const closeGame = document.getElementById("closeGame");
 
     if (world[player.x][player.y].hasZombie) {
+         gameOver();
+
         meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
 
         const endScrean = document.getElementById("endScrean");
         endScrean.src = "images/zombie.png";
         document.querySelector(".endBackground").style.display = "flex";
 
-        if(restart){
-            restart.addEventListener("click", function() {
+        if(restartBtn){
+            restartBtn.addEventListener("click", function() {
                 window.location.href = "playPage.html";
             });
         }
@@ -181,7 +181,7 @@ function meeting() {
                  window.location.href = "index.html";
             })
         }
-        gameOver();
+
     }
 
     else if (world[player.x][player.y].hasCat) {
@@ -203,9 +203,24 @@ function meeting() {
     if (catsLeft == 0) {
         meetingText.innerText = "du vann!!!!";
         gameOver();
+
+          if(restartBtn){
+            restartBtn.addEventListener("click", function() {
+                window.location.href = "playPage.html";
+            });
+        }
+        if(closeGame){
+            closeGame.addEventListener("click", function() {
+                 window.location.href = "index.html";
+            })
+        }
     }
 }
 function zombieMoves() {
+    // 30% chans att zombien INTE rör sig
+if (Math.random() < 0.4) {
+    return; // zombien står still
+}
     let newPositions = [];
     for (let x = 0; x < worldSize; x++) {
         for (let y = 0; y < worldSize; y++) {
