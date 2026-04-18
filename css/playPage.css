@@ -158,8 +158,8 @@ body {
     }
 
     .imagPlace {
-        width: 220px;
-        height: 220px;
+        width: 420px;
+        height: 320px;
     }
 
     #movingPlace {
@@ -189,11 +189,13 @@ body {
         font-size: 15px;
     }
     #north {
+        right: center;
         top: 30px;
         left: 40%;
         font-size: 15px;
     }
     #south {
+        right: center;
         bottom: 30px;
         right: 38%;
         font-size: 15px;
