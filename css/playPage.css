@@ -1,5 +1,11 @@
 body {
     background-color: rgb(172, 173, 94);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
 }
 
 #worldGrid {
@@ -97,40 +103,100 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 80vh;
+    width: 100%;
+    height: 100%;
     display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.7);
     z-index: 9999;
+    padding: 20px;
 }
 
 #endScrean {
-    max-width: 80vw;
-    max-height: 80vw;
+    max-width: 100vw;
+    max-height: 100vw;
     border-radius: 10px;
 }
 
 .game-btn {
     margin-top: 20px;
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 300px;
 }
 
 .game-btn button {
-    padding: 12px 24px;
+    padding: 12px;
     font-size: 20px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     background-color: #ffcc00;
     color: #000;
+    font-width: bold;
     transition: 0.2s;
 }
 
-.game-btn button:hover{
+.game-btn button:hover {
     background-color: #ffaa00;
     transform: scale(1.3);
+}
+
+@media (max-width: 600px) {
+    #worldGrid {
+        grid-template-columns: repeat(5, 45px);
+    }
+
+    .tile {
+        width: 45px;
+        height: 45px;
+        font-size: 12px;
+    }
+
+    .imagPlace {
+        width: 220px;
+        height: 220px;
+    }
+
+    #movingPlace {
+        width: 220px;
+        height: 160px;
+    }
+
+    #endScrean {
+        max-width: 250px;
+        max-height: 50vh;
+    }
+
+    .game-btn button {
+        font-size: 18px;
+        padding: 12px;
+    }
+
+
+    #east {
+        right: 30px;
+        top: 40%;
+        font-size: 15px;
+    }
+    #west {
+        left: 30px;
+        top: 40%;
+        font-size: 15px;
+    }
+    #north {
+        top: 30px;
+        left: 40%;
+        font-size: 15px;
+    }
+    #south {
+        bottom: 30px;
+        right: 38%;
+        font-size: 15px;
+    }
+
 }
