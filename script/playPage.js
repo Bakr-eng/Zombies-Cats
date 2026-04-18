@@ -158,38 +158,36 @@ function drawWorld() {
  const restartBtn = document.getElementById("restart");
  const closeGame = document.getElementById("closeGame");
  const meetingText = document.getElementById("Meet");
+ const endScrean = document.getElementById("endScrean");
 
+
+ function showEndScrean() {
+    document.querySelector(".endBackground").style.display = "flex";
+
+    restartBtn.onclick = () => window.location.href = "playPage.html";
+    closeGame.onclick = () => window.location.href = "index.html";
+
+    gameOver();
+ }
 
 function meeting() {
 
     if (world[player.x][player.y].hasZombie) {
-         gameOver();
 
         meetingText.innerText = "💀 Du mötte en zombie! GAME OVER";
-
-        const endScrean = document.getElementById("endScrean");
         endScrean.src = "images/zombie.png";
-        document.querySelector(".endBackground").style.display = "flex";
 
-        if(restartBtn){
-            restartBtn.addEventListener("click", function() {
-                window.location.href = "playPage.html";
-            });
-        }
-        if(closeGame){
-            closeGame.addEventListener("click", function() {
-                 window.location.href = "index.html";
-            })
-        }
-
+        showEndScrean();
+        return;
     }
 
-    else if (world[player.x][player.y].hasCat) {
+    if (world[player.x][player.y].hasCat) {
+
         meetingText.innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
+
         hittadeKatter ++;
         document.getElementById("foundCatNum").innerText = "Hittade katter: " + hittadeKatter;
-        
 
         const randomIndex = Math.floor(Math.random() * placeImages.length); //random bild efter att hitade katten
         world[player.x][player.y].image = placeImages[randomIndex];
@@ -201,20 +199,15 @@ function meeting() {
     }
 
     if (catsLeft == 0) {
-        meetingText.innerText = "du vann!!!!";
-        gameOver();
 
-          if(restartBtn){
-            restartBtn.addEventListener("click", function() {
-                window.location.href = "playPage.html";
-            });
-        }
-        if(closeGame){
-            closeGame.addEventListener("click", function() {
-                 window.location.href = "index.html";
-            })
-        }
+        meetingText.innerText = "du vann!!!!";
+        endScrean.src = "images/SavingCats.jpg";
+
+        showEndScrean();
+        return;
+
     }
+    
 }
 function zombieMoves() {
     // 30% chans att zombien INTE rör sig
