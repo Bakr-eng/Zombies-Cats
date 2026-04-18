@@ -179,26 +179,24 @@ body {
 
 
     #east {
-        right: 30px;
+        right: 0px;
         top: 40%;
-        font-size: 15px;
+        font-size: 25px;
     }
     #west {
-        left: 30px;
+        left: 0px;
         top: 40%;
-        font-size: 15px;
+        font-size: 25px;
     }
     #north {
-        right: center;
-        top: 30px;
-        left: 40%;
-        font-size: 15px;
+        top: 0px;
+        left: 70px;
+        font-size: 25px;
     }
     #south {
-        right: center;
-        bottom: 30px;
-        right: 38%;
-        font-size: 15px;
+        bottom: 0px;
+        right: 70px;
+        font-size: 25px;
     }
 
 }
