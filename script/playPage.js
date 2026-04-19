@@ -165,7 +165,7 @@ function drawWorld() {
  function showEndScrean() {
     document.querySelector(".endBackground").style.display = "flex";
 
-    restartBtn.onclick = () => window.location.href = "playpage.html";
+    restartBtn.onclick = () => window.location.href = "playPage.html";
     closeGame.onclick = () => window.location.href = "index.html";
 
     gameOver();
