@@ -91,14 +91,14 @@ body {
 #north {
     position: absolute;
     top: 0px;
-    left: 30%;
+    left: 45%;
     font-size: 40px;
 }
 
 #south {
     position: absolute;
     bottom: 0px;
-    right: 31%;
+    right: 42%;
     font-size: 40px;
 }
 #Met{
