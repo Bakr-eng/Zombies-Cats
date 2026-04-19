@@ -169,7 +169,6 @@ function drawWorld() {
 
     gameOver();
  }
-
 function meeting() {
 
     if (world[player.x][player.y].hasZombie) {
@@ -207,10 +206,9 @@ function meeting() {
         return;
 
     }
-    
 }
 function zombieMoves() {
-    // 30% chans att zombien INTE rör sig
+    // 40% chans att zombien INTE rör sig
 if (Math.random() < 0.4) {
     return; // zombien står still
 }
