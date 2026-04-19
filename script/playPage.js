@@ -142,12 +142,12 @@ function drawWorld() {
 
             // man kan se var katterna ligger shift-Alt-A
 
-            if (world[x][y].hasCat) {
+           /*  if (world[x][y].hasCat) {
                 tile.style.backgroundColor = "rgb(82, 121, 226)";
             }
             if (world[x][y].hasZombie) {
                 tile.style.backgroundColor = "rgb(196, 0, 0)";
-            }
+            } */
 
             grid.appendChild(tile);
         }
@@ -183,7 +183,8 @@ function meeting() {
 
     if (world[player.x][player.y].hasCat) {
 
-        meetingText.innerText = "🐱 Du hittade en katt!";
+
+        document.getElementById("Met").innerText = "🐱 Du hittade en katt!";
         world[player.x][player.y].hasCat = false;
 
         hittadeKatter ++;
