@@ -1,4 +1,4 @@
-const worldSize = 5 // behöver ändra nummret i playpage.css också, om man ska ändra
+const worldSize = 5 // behöver ändra nummret i game.css också, om man ska ändra
 let catImage = []
 let world = [];
 let player = { x: 2, y: 2 };
@@ -165,7 +165,7 @@ function drawWorld() {
  function showEndScrean() {
     document.querySelector(".endBackground").style.display = "flex";
 
-    restartBtn.onclick = () => window.location.href = "playPage.html";
+    restartBtn.onclick = () => window.location.href = "game.html";
     closeGame.onclick = () => window.location.href = "index.html";
 
     gameOver();

@@ -3,7 +3,7 @@ const logoutBtn = document.getElementById("logout");
 
 if (startBtn) {
     startBtn.addEventListener("click", function () {
-        window.location.href = "PlayPage.html";
+        window.location.href = "game.html";
     });
 }
 if (logoutBtn) {
