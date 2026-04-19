@@ -148,6 +148,7 @@ body {
     font-size: 20px;
     border: none;
     border-radius: 8px;
+    border-style: inset ;
     cursor: pointer;
     background-color: #ffcc00;
     color: #000;
