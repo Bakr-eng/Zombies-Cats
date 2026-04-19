@@ -140,13 +140,14 @@ function drawWorld() {
             tile.id = `tile-${x}-${y}`;
             tile.innerText = `${x},${y}`;
 
-            // man kan se var katterna ligger 
-            if (world[x][y].hasCat) {
-                tile.style.backgroundColor = "pink";
+            // man kan se var katterna ligger shift-Alt-A
+
+          /*   if (world[x][y].hasCat) {
+                tile.style.backgroundColor = "rgb(82, 121, 226)";
             }
             if (world[x][y].hasZombie) {
-                tile.style.backgroundColor = "rgb(0, 78, 4)";
-            }
+                tile.style.backgroundColor = "rgb(196, 0, 0)";
+            } */
 
             grid.appendChild(tile);
         }
