@@ -161,7 +161,6 @@ function drawWorld() {
  const meetingText = document.getElementById("Meet");
  const endScrean = document.getElementById("endScrean");
 
-
  function showEndScrean() {
     document.querySelector(".endBackground").style.display = "flex";
 
