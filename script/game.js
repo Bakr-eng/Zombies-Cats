@@ -60,6 +60,7 @@ async function initGame() {
     } catch (error) {
         console.error("error: ", error)
     }
+
     placeCat(3);
     placeZombi(1);
     drawWorld();
@@ -128,6 +129,15 @@ function updateView() {
     document.getElementById("south").disabled = (player.x >= worldSize - 1);
 
 }
+let cheatingMode = false;
+
+document.getElementById("cheating").addEventListener("click", toggleCheating);
+
+function toggleCheating() {
+    cheatingMode = !cheatingMode;
+    drawWorld();
+    updateView();
+}
 
 function drawWorld() {
     const grid = document.getElementById("worldGrid");
@@ -142,17 +152,39 @@ function drawWorld() {
 
             // man kan se var katterna ligger shift-Alt-A
 
-           /*  if (world[x][y].hasCat) {
+          /*    if (world[x][y].hasCat) {
                 tile.style.backgroundColor = "rgb(82, 121, 226)";
             }
             if (world[x][y].hasZombie) {
                 tile.style.backgroundColor = "rgb(196, 0, 0)";
-            } */
+            }  */
+           if (cheatingMode) {
+                if (world[x][y].hasCat) {
+                    tile.style.backgroundColor = "rgb(82, 121, 226)";
+                }
+                if (world[x][y].hasZombie) {
+                    tile.style.backgroundColor = "rgb(196, 0, 0)";
+                }
+            }
 
             grid.appendChild(tile);
         }
     }
-}
+}/* 
+let cheatingMode = false;
+
+
+function cheating() {
+    <button type="button" id="cheating">cheating</button>
+
+    
+            if (world[x][y].hasCat) {
+                tile.style.backgroundColor = "rgb(82, 121, 226)";
+            }
+            if (world[x][y].hasZombie) {
+                tile.style.backgroundColor = "rgb(196, 0, 0)";
+            }
+} */
 
 
 //---------------------------------- meeting cat or zombie
@@ -209,7 +241,7 @@ function meeting() {
     }
 }
 function zombieMoves() {
-    // 40% chans att zombien INTE rör sig
+    // 50% chans att zombien INTE rör sig
 if (Math.random() < 0.5) {
     return; // zombien står still
 }

@@ -4,9 +4,9 @@ body {
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
     min-height: 100vh;
     margin: 0px;
     gap: 5px;
@@ -32,7 +32,7 @@ body {
 
 .active {
     background-color: rgb(43, 255, 0) !important;
-    border: px solid rgb(0, 0, 0);
+    border: 3px solid rgb(0, 0, 0);
 }
 
 .imagPlace {
@@ -101,6 +101,8 @@ body {
     right: 42%;
     font-size: 40px;
 }
+
+
 #Met{
     color: greenyellow;
 }
@@ -108,6 +110,7 @@ body {
 #foundCatNum{
     color: greenyellow;
 }
+
 .endText{
     color: white;
     font-size: 40px;
@@ -117,7 +120,7 @@ body {
 }
 
 .endBackground {
-    position: fixed;
+    position:fixed;
     top: 0;
     left: 0;
     width: 100%;
